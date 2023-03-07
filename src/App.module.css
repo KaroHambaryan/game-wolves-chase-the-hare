@@ -1,1 +1,6 @@
 
+.flexible_centering_w{
+	display: flex;
+	justify-content: center;
+}
+

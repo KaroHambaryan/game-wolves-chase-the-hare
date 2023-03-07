@@ -1,7 +1,9 @@
 import boardSizeSelectonStyle from './BoardSizeSelecton.module.css'
 
 const BoardSizeSelecton = () => {
-	return <div className={boardSizeSelectonStyle}></div>
+	return <select name='boardSizeSelecton' className={boardSizeSelectonStyle}>
+		<option value="5">5x5</option>
+	</select>
 }
 
 export default BoardSizeSelecton;

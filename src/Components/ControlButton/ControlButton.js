@@ -1,11 +1,20 @@
 
+import { useDispatch } from 'react-redux';
+import { rabitActionCreator } from '../../features/rabitCoordinates/rabitCoordinatesSlice';
 import controlButtonStyle from './ControlButton.module.css'
 
-const ControlButton = () => {
-	return <button key={"1"}
-		className={`
+const ControlButton = ({ buttonName, actionName }) => {
+	const dispatch = useDispatch();
+	const еditRabbitCoordinates = () => {
+		dispatch(rabitActionCreator(actionName))
+	}
+	return <>
+		<button
+			onClick={еditRabbitCoordinates}
+			className={`
 	${controlButtonStyle.size}
-	`}></button>
+	`}>{buttonName}</button>
+	</>
 }
 
 export default ControlButton;

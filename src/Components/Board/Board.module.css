@@ -1,5 +1,9 @@
 .wrapper{
-	width: 500px;
-	height: 300px;
+	display: flex;
+	flex-wrap: wrap;
 	background-color: rgb(201, 201, 217);
+}
+
+.wrapper_position{
+	position: relative;
 }

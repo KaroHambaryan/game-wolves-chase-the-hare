@@ -4,10 +4,8 @@ import app from './App.module.css';
 function App() {
 
 	return (
-		<div
-			className={`
+		<div className={`
 		${app.flexible_centering_w} 
-
 		`}>
 			<Gameground />
 		</div>

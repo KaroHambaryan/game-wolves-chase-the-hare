@@ -1,7 +1,7 @@
 
 
-import { useSelector, useDispatch } from 'react-redux';
-import {statusGameActionCreator, getStatusGame } from '../../features/startButtonStatus/startButtonStatusSlice';
+import { useDispatch } from 'react-redux';
+import {statusGameActionCreator } from '../../features/startButtonStatus/startButtonStatusSlice';
 
 import startButtonStyle from './StartButton.module.css';
 
@@ -11,8 +11,8 @@ const StartButton = () => {
 	const changeGameStatus = () => {
 		dispatch(statusGameActionCreator())
 	}
-	const gameStatus = useSelector(getStatusGame)
-console.log(gameStatus);
+
+
 		return <>
 			<button
 				onClick = {changeGameStatus}

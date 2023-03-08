@@ -2,6 +2,7 @@ export function changeBoadSize(state={},action){
 	if (action.type === "board_size") {
 		return {
 			boardSize: action.payload.boardSize,
+			status: state.gameStatus
 		}
 	}
 	return state;

@@ -1,22 +1,23 @@
 import { useSelector } from 'react-redux';
 import { getStatusGame } from '../../features/startButtonStatus/startButtonStatusSlice';
-import wolfStyle from './Wolf.module.css';
+import ОbstacleStyle from './Оbstacle.module.css';
 
-const Wolf = () => {
+const Оbstacle = () => {
 
 	const statusButton = useSelector(getStatusGame);
 	const { gameStatus } = statusButton;
+	
 	return <div
 	style={{
 		transform: `translate(
-			${80}px, 
-			${120}px
+			${120}px, 
+			${80}px
 			)`,
 			display: gameStatus ?'block' :  'none'
 	}}
 	className={`
-${wolfStyle.size}
+${ОbstacleStyle.size}
 `}></div>
 }
 
-export default Wolf;
+export default Оbstacle;

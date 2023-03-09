@@ -6,6 +6,8 @@ const Wolf = () => {
 
 	const statusButton = useSelector(getStatusGame);
 	const { gameStatus } = statusButton;
+
+	
 	return <div
 	style={{
 		transform: `translate(

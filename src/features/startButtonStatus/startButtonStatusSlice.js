@@ -1,6 +1,7 @@
 // Start button Reducer
 export function changeStartButtonStatus(state ={}, action) {
 	if (action.type === "game_Status") {
+
 		return {
 			gameStatus: !state.gameStatus,
 		};
@@ -9,7 +10,7 @@ export function changeStartButtonStatus(state ={}, action) {
 }
 // Initial status Start Button
 export const initialStatusStartButton = {
-	gameStatus: false
+	gameStatus: false,
 }
 
 // for useSelection Start Button

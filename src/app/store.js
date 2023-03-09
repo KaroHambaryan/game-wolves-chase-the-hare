@@ -9,6 +9,7 @@ const store = createStore(combineReducers({
 	boardSize:  changeBoadSize,
 }), {
 	rabitCoordinates: initialRabitCoordinates,
+	// wolfCoordinates: initialWolfsCoordinates,
 	gameStatus: initialStatusStartButton,
 	boardSize: initialboardSize,
 })

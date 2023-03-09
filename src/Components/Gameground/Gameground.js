@@ -13,9 +13,9 @@ const Gameground = () => {
 	${gamegroundStyle.wrapper}
 	${gamegroundStyle.flexible_centering_column}
 	`}>
+		<BoardSizeSelecton />
 		<StartButton />
 		<Board/>
-		<BoardSizeSelecton />
 		<ControlButtonsBlock />
 	</div>
 }

@@ -7,21 +7,20 @@ import rabitStyle from './Rabit.module.css';
 
 const Rabit = () => {
 	// game status
-	const statusButton = useSelector(getStatusGame);
-	const { gameStatus } = statusButton;
+	const { gameStatus } = useSelector(getStatusGame);
 
 	// Compiler costom hook
 	const getCSSCoordinates = useCompilerCSSCoordinates();
 
 	// rabit Coordinates
 	const rabitCoordinates = useSelector(getRabitCoordinates);
-	const rabitCSSCoordinates = getCSSCoordinates(rabitCoordinates.x_Rabit, rabitCoordinates.y_Rabit)
+	const rabitCSSCoordinates = getCSSCoordinates(rabitCoordinates.x, rabitCoordinates.y)
 
 	return <div
 		style={{
 			transform: `translate(
-				${rabitCSSCoordinates._xCSS}px, 
-				${rabitCSSCoordinates._yCSS}px
+				${rabitCSSCoordinates.x}px, 
+				${rabitCSSCoordinates.y}px
 				)`,
 				display: gameStatus ?'block' : 'none'
 		}}

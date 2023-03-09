@@ -1,5 +1,5 @@
 import Rabit from "../Rabit/Rabit";
-import Wolf from "../Wolf/Wolf";
+import LogicRenderWolves from "../Wolf/LogicRenderWolves";
 import Оbstacle from '../Оbstacle/Оbstacle'
 
 const Participants = () => {
@@ -7,7 +7,7 @@ const Participants = () => {
 	
 	return <>
 		<Rabit />
-		<Wolf/>
+		<LogicRenderWolves/>
 		<Оbstacle/>
 	</>;
 }

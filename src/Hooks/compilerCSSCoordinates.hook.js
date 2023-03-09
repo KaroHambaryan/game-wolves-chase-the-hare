@@ -2,11 +2,11 @@
 
 export default function useCompilerCSSCoordinates() {
 
-	const getCSSCoordinates = (x, y) => {
+	const getCSSCoordinates = (elemX, elemY) => {
 		const oneCellPersent = 40;
 		const cssCoordinates = {
-			_xCSS: +x * oneCellPersent,
-			_yCSS: +y * oneCellPersent
+			x: +elemX * oneCellPersent,
+			y: +elemY * oneCellPersent
 		};
 		return cssCoordinates;
 	}

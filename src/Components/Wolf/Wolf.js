@@ -1,8 +1,9 @@
+
 import { useSelector } from 'react-redux';
 import { getStatusGame } from '../../features/startButtonStatus/startButtonStatusSlice';
 import wolfStyle from './Wolf.module.css';
 
-const Wolf = () => {
+const Wolf = ({x, y}) => {
 
 	const statusButton = useSelector(getStatusGame);
 	const { gameStatus } = statusButton;
@@ -11,8 +12,8 @@ const Wolf = () => {
 	return <div
 	style={{
 		transform: `translate(
-			${80}px, 
-			${120}px
+			${x}px, 
+			${y}px
 			)`,
 			display: gameStatus ?'block' :  'none'
 	}}

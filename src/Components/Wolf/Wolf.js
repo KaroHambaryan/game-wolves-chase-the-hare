@@ -4,10 +4,7 @@ import { getStatusGame } from '../../features/startButtonStatus/startButtonStatu
 import wolfStyle from './Wolf.module.css';
 
 const Wolf = ({x, y}) => {
-
-	const statusButton = useSelector(getStatusGame);
-	const { gameStatus } = statusButton;
-
+	const { gameStatus } = useSelector(getStatusGame);
 	
 	return <div
 	style={{

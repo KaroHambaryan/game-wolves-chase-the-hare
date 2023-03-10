@@ -1,13 +1,21 @@
 
-import { useDispatch } from 'react-redux';
-import { boardSizeActionCreater} from '../../features/boardSize/boardSizeSlice';
+
+import { useDispatch} from 'react-redux';
+import {boardSizeActionCreater } from '../../features/boardSize/boardSizeSlice';
+import { randomActonCreator } from '../../features/rangomCoordinates/randomCoordinatesSlice';
+
+
 import boardSizeSelectonStyle from './BoardSizeSelecton.module.css';
 
+
+
 const BoardSizeSelecton = () => {
-	
-const dispatch = useDispatch();
+
+	const dispatch = useDispatch();
+
 	const changeSizeBoard = (event) => {
-		dispatch(boardSizeActionCreater(+event.target.value))
+		dispatch(boardSizeActionCreater(+event.target.value));
+		dispatch(randomActonCreator(+event.target.value))
 	};
 
 	return <>

@@ -1,12 +1,14 @@
 import React from 'react';
-
+import { useSelector } from 'react-redux';
+import { getBoardSize } from '../../features/boardSize/boardSizeSlice';
 import Cell from '../Cell/Cell';
 import useLoop from '../../Hooks/loop.hook';
 import Participants from '../Participants/Participants';
-import { useSelector } from 'react-redux';
-import { getBoardSize } from '../../features/boardSize/boardSizeSlice';
 
 import boardStyle from './Board.module.css';
+
+
+
 
 const Board = () => {
 	const {boardSize} = useSelector(getBoardSize);
@@ -14,7 +16,8 @@ const Board = () => {
 	const board = createCells(boardSize);
 
 	return <>
-		{boardSize && <div className={`
+		{boardSize &&
+			<div className={`
 	${boardStyle.wrapper}
 	${boardStyle.wrapper_position}
 	`}>

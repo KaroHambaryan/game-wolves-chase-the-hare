@@ -4,8 +4,7 @@ import { getBoardSize } from "../../features/boardSize/boardSizeSlice";
 
 const LogicRenderWolves = () => {
 	const { boardSize } = useSelector(getBoardSize);
-
-	console.log(boardSize);
+	
 	return (
 		<>
 			{boardSize === 5 ? <>

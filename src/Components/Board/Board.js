@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { useSelector } from 'react-redux';
 import { getBoardSize } from '../../features/boardSize/boardSizeSlice';
 import Cell from '../Cell/Cell';
@@ -35,4 +35,4 @@ const Board = () => {
 	</>
 }
 
-export default React.memo(Board);
+export default Board;

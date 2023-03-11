@@ -1,13 +1,13 @@
 
-import { useDispatch} from 'react-redux';
-import { rabitActionCreator } from '../../features/rabitCoordinates/rabitCoordinatesSlice';
+import { useDispatch } from 'react-redux';
+import { sendRabbitNewCoodinates } from '../../features/rabbit/rabbitSlice';
 import controlButtonStyle from './ControlButton.module.css'
 
 const ControlButton = ({ buttonName, actionName }) => {
 	const dispatch = useDispatch();
 
 	const еditRabbitCoordinates = () => {
-		dispatch(rabitActionCreator(actionName))
+		dispatch(sendRabbitNewCoodinates(actionName))
 	}
 
 	return <>

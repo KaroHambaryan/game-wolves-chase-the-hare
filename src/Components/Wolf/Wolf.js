@@ -1,20 +1,22 @@
-
+import useCompilerXYtoCSSCoordinates from '../../Hooks/compilerXYCoordinates.hook';
 import { useSelector } from 'react-redux';
-import { getStatusGame } from '../../features/startButtonStatus/startButtonStatusSlice';
+import { getGameStatus } from '../../features/startButton/startButtonSlice';
 import wolfStyle from './Wolf.module.css';
 
-const Wolf = ({x, y}) => {
-	const { gameStatus } = useSelector(getStatusGame);
+const Wolf = ({prop}) => {
+	const { gameStatus } = useSelector(getGameStatus);
+	const getCSSCoordinates = useCompilerXYtoCSSCoordinates();
+	const wolf = prop && getCSSCoordinates(prop.x, prop.y);
 	
-	return <div
-	style={{
-		transform: `translate(
-			${x}px, 
-			${y}px
+	return prop && <div
+		style={{
+			transform: `translate(
+			${wolf.x}px, 
+			${wolf.y}px
 			)`,
-			display: gameStatus ?'block' :  'none'
-	}}
-	className={`
+			display: gameStatus ? 'block' : 'none'
+		}}
+		className={`
 ${wolfStyle.size}
 `}></div>
 }

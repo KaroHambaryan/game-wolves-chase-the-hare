@@ -1,26 +1,41 @@
 
 
+import { useEffect } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
-import { statusGameActionCreator, getStatusGame } from '../../features/startButtonStatus/startButtonStatusSlice';
+import { sendBarriersRandomCoordinates } from '../../features/barrier/barrierSlice';
 import { getBoardSize } from '../../features/boardSize/boardSizeSlice';
-import { getRandomCoordinates, randomActonCreator } from '../../features/rangomCoordinates/randomCoordinatesSlice';
-import { getWolfsState, wolfsAction } from '../../features/wolfCoordinates/wolfCoordintesSlice';
+import { sendHouseRandomCoodinates } from '../../features/house/houseSlice';
+import { sendRabbitRandomCoodinates } from '../../features/rabbit/rabbitSlice';
+import { getRandomCoordinates, sendRandomCoodinates } from '../../features/randomCoordinates/randomCoordinatesSlice';
+import { getGameStatus, sendGameStatus } from '../../features/startButton/startButtonSlice';
+import { sendWolvesRandomCoordinates } from '../../features/wolves/wolvesSlice';
 
 
 import startButtonStyle from './StartButton.module.css';
 
 const StartButton = () => {
-	const { gameStatus } = useSelector(getStatusGame);
-	const { boardSize } = useSelector(getBoardSize);
-	const { randomCoordinates } = useSelector(getRandomCoordinates);
-	const wolfsCoordinates = useSelector(getWolfsState);
-
+	
 	const dispatch = useDispatch();
+	const { boardSize } = useSelector(getBoardSize);
+	const { gameStatus } = useSelector(getGameStatus);
+
+
+	const randomCoordinates  = useSelector(getRandomCoordinates);
+
+	useEffect(() => {
+		if (gameStatus) {
+			dispatch(sendWolvesRandomCoordinates(randomCoordinates.wolves));
+			dispatch(sendBarriersRandomCoordinates(randomCoordinates.barriers));
+			dispatch(sendRabbitRandomCoodinates(randomCoordinates.rabbit));
+			dispatch(sendHouseRandomCoodinates(randomCoordinates.house));
+			console.log("----random---");
+		}
+	}, [randomCoordinates])
 
 	const changeGameStatus = () => {
-		dispatch(statusGameActionCreator());
-		dispatch(randomActonCreator(boardSize))
-		dispatch(wolfsAction(wolfsCoordinates, randomCoordinates, boardSize, gameStatus))
+		dispatch(sendGameStatus(true));
+		dispatch(sendRandomCoodinates(boardSize));
 	}
 
 	return <>

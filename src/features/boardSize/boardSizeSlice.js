@@ -1,5 +1,5 @@
-export function changeBoadSize(state={},action){
-	if (action.type === "board_size") {
+export function changeBoadSize(state = {}, action) {
+	if (action.type === "Send_New_Board_Size") {
 		return {
 			boardSize: action.payload.boardSize,
 		}
@@ -7,7 +7,7 @@ export function changeBoadSize(state={},action){
 	return state;
 }
 
-export const initialboardSize = {
+export const initialBoardSize = {
 	boardSize: 5,
 }
 
@@ -15,9 +15,9 @@ export function getBoardSize(state) {
 	return state.boardSize;
 }
 
-export function boardSizeActionCreater(value) {
+export function sendNewBoardSize(value) {
 	return {
-		type: "board_size",
+		type: "Send_New_Board_Size",
 		payload: {
 			boardSize: value
 		}

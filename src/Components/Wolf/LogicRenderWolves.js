@@ -1,28 +1,31 @@
-import Wolf from "./Wolf";
+
 import { useSelector } from "react-redux";
 import { getBoardSize } from "../../features/boardSize/boardSizeSlice";
+import { getWolvesCoordinates } from "../../features/wolves/wolvesSlice";
+
+import Wolf from "./Wolf";
 
 const LogicRenderWolves = () => {
 	const { boardSize } = useSelector(getBoardSize);
-	
+	const { wolf1, wolf2, wolf3, wolf4, wolf5 } = useSelector(getWolvesCoordinates);
 	return (
-		<>
+		wolf1 && <>
 			{boardSize === 5 ? <>
-				<Wolf x={40} y={80} />
-				<Wolf x={80} y={40} />
-				<Wolf x={120} y={0} />
+				<Wolf key={"w1"} prop={wolf1} />
+				<Wolf key={"w2"} prop={wolf2} />
+				<Wolf key={"w3"} prop={wolf3} />
 			</> : boardSize === 7 ? <>
-				<Wolf x={40} y={80} />
-				<Wolf x={80} y={40} />
-				<Wolf x={120} y={0} />
-				<Wolf x={200} y={200} />
+				<Wolf key={"w1"} prop={wolf1} />
+				<Wolf key={"w2"} prop={wolf2} />
+				<Wolf key={"w3"} prop={wolf3} />
+				<Wolf key={"w4"} prop={wolf4} />
 			</> : boardSize === 10 ? <>
-				<Wolf x={40} y={80} />
-				<Wolf x={80} y={40} />
-				<Wolf x={240} y={40} />
-				<Wolf x={320} y={120} />
-				<Wolf x={200} y={200} />
-			</>: null}
+				<Wolf key={"w1"} prop={wolf1} />
+				<Wolf key={"w2"} prop={wolf2} />
+				<Wolf key={"w3"} prop={wolf3} />
+				<Wolf key={"w4"} prop={wolf4} />
+				<Wolf key={"w5"} prop={wolf5} />
+			</> : null}
 		</>
 	);
 }

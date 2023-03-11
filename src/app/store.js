@@ -1,25 +1,28 @@
 import { combineReducers, createStore } from 'redux';
-import { rabbitCoordinatesReducer, initialRabitCoordinates } from '../features/rabitCoordinates/rabitCoordinatesSlice';
-import { changeStartButtonStatus, initialStatusStartButton } from '../features/startButtonStatus/startButtonStatusSlice';
-import { initialboardSize, changeBoadSize } from '../features/boardSize/boardSizeSlice';
-import { initialWolsCoordinates, changeWolfsCoordinates } from '../features/wolfCoordinates/wolfCoordintesSlice';
-import { initialRandomCoordinates, generateRandomCoordinate } from '../features/rangomCoordinates/randomCoordinatesSlice';
-// import { initialObstacleCoordinates, changeObstacleCoordinates } from '../features/obstacle/obstacleSlice';
+import { initialGameStatus, changeGameStatus } from '../features/startButton/startButtonSlice';
+import { initialBoardSize, changeBoadSize } from '../features/boardSize/boardSizeSlice';
+import { initialRandomCoordinates, changeRandomCoordinates } from '../features/randomCoordinates/randomCoordinatesSlice';
+import { initialHouseCoordinates, changeHouseCoordinates } from '../features/house/houseSlice';
+import { initialBarriersCoordinates, changebarriersCoordinates } from '../features/barrier/barrierSlice';
+import { initialRabbitCoordinates, changeRabbitCoordinates } from '../features/rabbit/rabbitSlice';
+import { initialWolvesCoordinates, changeWolvesCoordinates } from '../features/wolves/wolvesSlice';
 
 const store = createStore(combineReducers({
-	gameStatus: changeStartButtonStatus,
+	gameStatus: changeGameStatus,
 	boardSize: changeBoadSize,
-	rabitCoordinates: rabbitCoordinatesReducer,
-	randomCoordinates: generateRandomCoordinate,
-	wolfsCoordinates: changeWolfsCoordinates,
-	// obstacleCoordinates: changeObstacleCoordinates,
+	randomCoordinates: changeRandomCoordinates,
+	houseCoordinates: changeHouseCoordinates,
+	barriersCoordinates: changebarriersCoordinates,
+	rabbitCoordinates: changeRabbitCoordinates,
+	wolvesCoordinates: changeWolvesCoordinates,
 }), {
-	gameStatus: initialStatusStartButton,
-	boardSize: initialboardSize,
-	rabitCoordinates: initialRabitCoordinates,
+	gameStatus: initialGameStatus,
+	boardSize: initialBoardSize,
 	randomCoordinates: initialRandomCoordinates,
-	wolfsCoordinates: initialWolsCoordinates,
-	// obstacleCoordinates: initialObstacleCoordinates,
+	houseCoordinates: initialHouseCoordinates,
+	barriersCoordinates: initialBarriersCoordinates,
+	rabbitCoordinates: initialRabbitCoordinates,
+	wolvesCoordinates: initialWolvesCoordinates,
 })
 
 export default store;

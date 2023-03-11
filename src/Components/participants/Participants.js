@@ -1,14 +1,13 @@
-import Rabit from "../Rabit/Rabit";
+import Rabbit from "../Rabbit/Rabbit";
 import LogicRenderWolves from "../Wolf/LogicRenderWolves";
-import Оbstacle from '../Оbstacle/Оbstacle'
+import Barrier from '../Barrier/Barrier';
 
 const Participants = () => {
-	
-	
+
 	return <>
-		<Rabit />
-		<LogicRenderWolves/>
-		<Оbstacle/>
+		<Rabbit />
+		<LogicRenderWolves />
+		<Barrier />
 	</>;
 }
 

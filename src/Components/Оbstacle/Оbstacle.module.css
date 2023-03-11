@@ -1,8 +1,0 @@
-.size{
-	width: 40px;
-	height: 40px;
-	background-color: rgb(183, 199, 1);
-	position: absolute;
-	transition: all 0.5s ease-out;
-	display: block;
-}

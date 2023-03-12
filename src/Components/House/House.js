@@ -1,19 +1,18 @@
 
 
 import { useSelector } from 'react-redux';
-import { getRabbitCoordinates } from '../../features/rabbit/rabbitSlice';
+import { getHouseCoordinates } from '../../features/house/houseSlice';
 import { getGameStatus } from '../../features/startButton/startButtonSlice';
 import useCompilerXYtoCSSCoordinates from '../../Hooks/compilerXYCoordinates.hook';
+import houseStyle from './House.module.css';
 
-import rabbitStyle from './Rabbit.module.css';
-
-const Rabbit = () => {
+const House = () => {
 	const { gameStatus } = useSelector(getGameStatus);
 	const getCSSCoordinates = useCompilerXYtoCSSCoordinates();
-	const rabbitCoordinates = useSelector(getRabbitCoordinates);
+	const houseCoordinates = useSelector(getHouseCoordinates);
 
-	let conditionalRendering = rabbitCoordinates.x !== null && rabbitCoordinates.x !== undefined;
-	const { x, y } = conditionalRendering && getCSSCoordinates(rabbitCoordinates.x, rabbitCoordinates.y);
+	let conditionalRendering = houseCoordinates.x !== null && houseCoordinates.x !== undefined;
+	const { x, y } = conditionalRendering && getCSSCoordinates(houseCoordinates.x, houseCoordinates.y);
 
 	return conditionalRendering && <div
 		style={{
@@ -24,8 +23,8 @@ const Rabbit = () => {
 			display: gameStatus ? 'block' : 'none'
 		}}
 		className={`
-	${rabbitStyle.size}
+	${houseStyle.size}
 	`}></div>
 }
 
-export default Rabbit;
+export default House;

@@ -1,8 +1,8 @@
 
 
 import { useEffect } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
+
 import { sendBarriersRandomCoordinates } from '../../features/barrier/barrierSlice';
 import { getBoardSize } from '../../features/boardSize/boardSizeSlice';
 import { sendHouseRandomCoodinates } from '../../features/house/houseSlice';
@@ -29,7 +29,6 @@ const StartButton = () => {
 			dispatch(sendBarriersRandomCoordinates(randomCoordinates.barriers));
 			dispatch(sendRabbitRandomCoodinates(randomCoordinates.rabbit));
 			dispatch(sendHouseRandomCoodinates(randomCoordinates.house));
-			console.log("----random---");
 		}
 	}, [randomCoordinates])
 
@@ -47,6 +46,5 @@ const StartButton = () => {
 		</button>
 	</>
 }
-
 
 export default StartButton;

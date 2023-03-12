@@ -8,6 +8,7 @@ import Wolf from "./Wolf";
 const LogicRenderWolves = () => {
 	const { boardSize } = useSelector(getBoardSize);
 	const { wolf1, wolf2, wolf3, wolf4, wolf5 } = useSelector(getWolvesCoordinates);
+
 	return (
 		wolf1 && <>
 			{boardSize === 5 ? <>

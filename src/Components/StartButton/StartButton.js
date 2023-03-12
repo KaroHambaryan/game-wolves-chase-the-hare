@@ -25,8 +25,8 @@ const StartButton = () => {
 
 	useEffect(() => {
 		if (gameStatus) {
-			dispatch(sendWolvesRandomCoordinates(randomCoordinates.wolves));
-			dispatch(sendBarriersRandomCoordinates(randomCoordinates.barriers));
+			dispatch(sendWolvesRandomCoordinates(randomCoordinates.wolves,boardSize));
+			dispatch(sendBarriersRandomCoordinates(randomCoordinates.barriers,boardSize));
 			dispatch(sendRabbitRandomCoodinates(randomCoordinates.rabbit));
 			dispatch(sendHouseRandomCoodinates(randomCoordinates.house));
 		}

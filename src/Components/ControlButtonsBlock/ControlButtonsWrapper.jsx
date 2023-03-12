@@ -8,7 +8,7 @@ const ControlButtonsWrapper = () => {
 	`}>
 		<ControlButton
 			buttonName={"LF"}
-			actionName={"lf"}
+			actionName={"left"}
 		/>
 		<div className={`
 	${controlButtonsBlockStyle.vertical_block_wrapper}
@@ -20,12 +20,12 @@ const ControlButtonsWrapper = () => {
 				actionName={"up"} />
 			<ControlButton
 				buttonName={"DW"}
-				actionName={"dw"}/>
+				actionName={"down"}/>
 				
 		</div>
 		<ControlButton
 				buttonName={"RI"}
-				actionName={"ri"}
+				actionName={"right"}
 		/>
 	</div>
 }

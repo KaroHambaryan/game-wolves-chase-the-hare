@@ -14,7 +14,7 @@ const Rabbit = () => {
 
 	let conditionalRendering = rabbitCoordinates.x !== null && rabbitCoordinates.x !== undefined;
 	const { x, y } = conditionalRendering && getCSSCoordinates(rabbitCoordinates.x, rabbitCoordinates.y);
-
+	conditionalRendering && console.log(x, y);
 	return conditionalRendering && <div
 		style={{
 			transform: `translate(

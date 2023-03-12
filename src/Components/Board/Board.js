@@ -12,8 +12,8 @@ import boardStyle from './Board.module.css';
 
 const Board = () => {
 	const {boardSize} = useSelector(getBoardSize);
-	const createCells = useLoop();
-	const board = createCells(boardSize);
+	const loop = useLoop();
+	const board = loop.createCells(boardSize);
 
 	return <>
 		{boardSize &&

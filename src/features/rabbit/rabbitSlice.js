@@ -6,9 +6,15 @@ export function changeRabbitCoordinates(state = {}, action) {
 
 	if (ifDuttonDown) {
 		const { wolves, barriers, house, rabbit, size } = action.payload.dataForRabbit;
-			let ifWolves = includesXYInObject(wolves, rabbit,action.type);
-			let ifBarriers = includesXYInObject(barriers, rabbit, action.type);
-		ifChangeRabbitCoordinates = ifWolves || ifBarriers
+
+		const ifOutsideOrNot = ifNextStepsMatch(checkOutsideOrNot, [rabbit, size.boardSize, action.type]);
+		const ifTransition = ifOutsideOrNot && ifNextStepsMatch(checkFuturePosition, [rabbit, size.boardSize, action.type, action.payload.dataForRabbit]);
+
+		const ifWolves = includesXYInObject(wolves, ifNextStepsMatch, toCompareXYInArray, [rabbit, house, action.type]);
+		const ifBarriers = includesXYInObject(barriers, ifNextStepsMatch, toCompareXYInArray, [rabbit, house, action.type]);
+		const ifHouse = ifNextStepsMatch(toCompareXYInObject, [rabbit, house, action.type]);
+		
+		ifChangeRabbitCoordinates = ifWolves || ifBarriers || ifHouse || ifTransition
 	}
 	if (action.type === "up" && !ifChangeRabbitCoordinates) {
 		return {
@@ -64,30 +70,102 @@ export function sendRabbitRandomCoodinates(rabbitRandomCoordinatesArray) {
 }
 
 //=================================================
-function includesXYInObject(comparableObject, targetObject, actionType) {
+function includesXYInObject(comparableObject, checkTheNextStep, searchInCheckFN, dependArray) {
 	let newArray = [];
-	let currentX = targetObject.x;
-	let currentY = targetObject.y;
 
 	for (let element in comparableObject) {
 		newArray.push(comparableObject[element]);
 	}
-	
-	function includesXYCoordinates(arrayOfObject, x, y) {
-		return arrayOfObject.some((elem, i)=> elem.x === x && elem.y === y)
-	}
+
+	dependArray.splice(1, 1, newArray);
+
+	return checkTheNextStep(searchInCheckFN, dependArray)
+}
+
+function ifNextStepsMatch(searchFn, dependArray) {
+	let [targetObject, comparedObject, actionType, payload] = dependArray;
+
+	let currentX = targetObject.x;
+	let currentY = targetObject.y;
+
 	if (actionType === "up") {
 		let futureY = currentY - 1;
-		return includesXYCoordinates(newArray, currentX, futureY);
+
+		return searchFn(comparedObject, currentX, futureY, payload, actionType);
+
 	} else if (actionType === "down") {
 		let futureY = currentY + 1;
-		return includesXYCoordinates(newArray, currentX, futureY);
+
+		return searchFn(comparedObject, currentX, futureY, payload, actionType);
+
 	} else if (actionType === "left") {
 		let futureX = currentX - 1;
-		return includesXYCoordinates(newArray, futureX, currentY);
+
+		return searchFn(comparedObject, futureX, currentY, payload, actionType);
+
 	} else if (actionType === "right") {
 		let futureX = currentX + 1;
-		return includesXYCoordinates(newArray, futureX, currentY);
+
+		return searchFn(comparedObject, futureX, currentY, payload, actionType);
+	}
+}
+
+function toCompareXYInArray(arrayOfObject, currentX, currentY) {
+	return arrayOfObject.some((elem) => elem.x === currentX && elem.y === currentY)
+}
+
+function toCompareXYInObject(copmObj, currentX, currentY) {
+	return copmObj.x === currentX && copmObj.y === currentY;
+}
+
+function checkOutsideOrNot(boardSize, currentX, currentY) {
+	if (currentX === boardSize || currentY === boardSize) {
+		return true
+	} else if (currentX === -1 || currentY === -1) {
+		return true
+	} else {
+		return false
+	}
+}
+
+function checkFuturePosition(boardSize, currentX, currentY, payload, actionType) {
+	const newPayload = { ...payload };
+	let { x, y } = newPayload.rabbit;
+
+	if (currentX === boardSize) {
+		x = currentX - (boardSize + 1);
+		newPayload.rabbit = { x, y };
+
+		return checkTransition(newPayload, actionType);
+
+	} else if (currentY === boardSize) {
+		y = currentY - (boardSize + 1);
+		newPayload.rabbit = { x, y };
+
+		return checkTransition(newPayload, actionType);
+
+	} else if (currentX === -1) {
+		x = currentX + (boardSize + 1);
+		newPayload.rabbit = { x, y };
+
+		return checkTransition(newPayload, actionType);
+
+	} else if (currentY === -1) {
+		y = currentY + (boardSize + 1);
+		newPayload.rabbit = { x, y };
+
+		return checkTransition(newPayload, actionType);
+
 	}
 
+}
+
+function checkTransition(newPayload, actionType) {
+	const { wolves, barriers, house, rabbit } = newPayload;
+
+	const ifWolves = includesXYInObject(wolves, ifNextStepsMatch, toCompareXYInArray, [rabbit, house, actionType]);
+	const ifBarriers = includesXYInObject(barriers, ifNextStepsMatch, toCompareXYInArray, [rabbit, house, actionType]);
+	const ifHouse = ifNextStepsMatch(toCompareXYInObject, [rabbit, house, actionType]);
+
+	return ifWolves || ifBarriers || ifHouse
 }

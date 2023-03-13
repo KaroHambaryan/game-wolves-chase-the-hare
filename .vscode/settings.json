@@ -1,1 +1,8 @@
-{}
+{
+	"workbench.colorCustomizations": {
+		"editorGroup.border": "#d3ab4f",
+		"sash.hoverBorder": "#d3ab4f",
+		"sideBar.border": "#d3ab4f",
+		"tab.activeBorder": "#d3ab4f"
+	}
+}

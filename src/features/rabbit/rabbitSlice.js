@@ -1,39 +1,61 @@
 // Reduser Rabbit coordinates from control buttons block
 export function changeRabbitCoordinates(state = {}, action) {
-	var ifChangeRabbitCoordinates = false;
-	var ifTransition = false;
+
 	const buttonsName = ["up", "down", "left", "right"];
 	const ifDuttonDown = buttonsName.includes(action.type);
 
 	if (ifDuttonDown) {
 		const { wolves, barriers, house, rabbit, size } = action.payload.dataForRabbit;
-
-		const ifOutsideOrNot = ifNextStepsMatch(checkOutsideOrNot, [rabbit, size.boardSize, action.type]);
-		ifTransition = ifOutsideOrNot && ifNextStepsMatch(checkFuturePosition, [rabbit, size.boardSize, action.type, action.payload.dataForRabbit]);
-
+		var checkSize = size.boardSize;
+		var ifOutsideOrNot = ifNextStepsMatch(checkOutsideOrNot, [rabbit, size.boardSize, action.type]);
+		var ifTransition = ifOutsideOrNot && ifNextStepsMatch(checkFuturePosition, [rabbit, size.boardSize, action.type, action.payload.dataForRabbit]);
+	
 		const ifWolves = includesXYInObject(wolves, ifNextStepsMatch, toCompareXYInArray, [rabbit, house, action.type]);
 		const ifBarriers = includesXYInObject(barriers, ifNextStepsMatch, toCompareXYInArray, [rabbit, house, action.type]);
 		const ifHouse = ifNextStepsMatch(toCompareXYInObject, [rabbit, house, action.type]);
-
-		ifChangeRabbitCoordinates = ifWolves || ifBarriers || ifHouse || ifTransition
+		var ifChangeRabbitCoordinates = ifWolves || ifBarriers || ifHouse || ifTransition
 	}
 	if (action.type === "up" && !ifChangeRabbitCoordinates) {
+		if (ifOutsideOrNot && state.y === 0) {
+			return {
+				...state,
+				y: state.y + (checkSize-1)
+			}
+		}
 		return {
 			...state,
 			y: state.y - 1
 		}
 	} else if (action.type === "down" && !ifChangeRabbitCoordinates) {
+		if (ifOutsideOrNot && state.y === (checkSize-1)) {
+			return {
+				...state,
+				y: state.y - (checkSize-1)
+			}
+		}
 		return {
 			...state,
 			y: state.y + 1
 		}
 
 	} else if (action.type === "left" && !ifChangeRabbitCoordinates) {
+		if (ifOutsideOrNot && state.x === 0) {
+			return {
+				...state,
+				x: state.x + (checkSize-1)
+			}
+		}
 		return {
 			...state,
 			x: state.x - 1
 		}
 	} else if (action.type === "right" && !ifChangeRabbitCoordinates) {
+		if (ifOutsideOrNot && state.x === (checkSize-1)) {
+			return {
+				...state,
+				x: state.x - (checkSize-1)
+			}
+		}
 		return {
 			...state,
 			x: state.x + 1
@@ -41,6 +63,8 @@ export function changeRabbitCoordinates(state = {}, action) {
 	} else if (action.type === "Send_Rabbit_Random_Coordinates") {
 		const [rabbit] = action.payload.rabbitRandomCoordinatesArray;
 		return { x: rabbit.x, y: rabbit.y };
+	} else if (action.type === "Send_Rabbit_Transition") {
+
 	}
 	return state;
 }
@@ -67,6 +91,12 @@ export function sendRabbitRandomCoodinates(rabbitRandomCoordinatesArray) {
 		payload: {
 			rabbitRandomCoordinatesArray,
 		}
+	}
+}
+
+export function sendRabbitTransition() {
+	return {
+		type: "Send_Rabbit_Transition",
 	}
 }
 
@@ -120,9 +150,9 @@ function toCompareXYInObject(copmObj, currentX, currentY) {
 }
 
 function checkOutsideOrNot(boardSize, currentX, currentY) {
-	if (currentX === boardSize || currentY === boardSize) {
+	if (currentX >= boardSize || currentY >= boardSize) {
 		return true
-	} else if (currentX === -1 || currentY === -1) {
+	} else if (currentX <= -1 || currentY <= -1) {
 		return true
 	} else {
 		return false

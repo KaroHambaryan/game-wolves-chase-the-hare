@@ -3,7 +3,7 @@
 import { useSelector } from 'react-redux';
 import { getHouseCoordinates } from '../../features/house/houseSlice';
 import { getGameStatus } from '../../features/startButton/startButtonSlice';
-import useCoordinateEditing from '../../Hooks/compilerXYCoordinates.hook';
+import useCoordinateEditing from '../../Hooks/coordinateEditing.hook';
 import houseStyle from './House.module.css';
 
 const House = () => {

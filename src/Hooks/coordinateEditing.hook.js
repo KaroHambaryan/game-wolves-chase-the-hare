@@ -11,6 +11,10 @@ export default function useCoordinateEditing() {
 		return cssCoordinates;
 	}
 
+	// function checkCoordinatesMatch(elemX, elemY) {
+		
+	// }
+
 
 	return createCSSCoordinates;
 }

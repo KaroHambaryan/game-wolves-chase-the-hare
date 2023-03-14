@@ -1,5 +1,6 @@
 
 // import { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getbarriersCoordinates } from '../../features/barrier/barrierSlice';
 import { getBoardSize } from '../../features/boardSize/boardSizeSlice';
@@ -19,14 +20,10 @@ const ControlButton = ({ buttonName, actionName }) => {
 
 	const еditRabbitCoordinates = () => {
 		console.log("------------------");
-		dispatch(sendRabbitNewCoodinates(actionName,dataForRabbit))
+		dispatch(sendRabbitNewCoodinates(actionName, dataForRabbit));
 		console.log(dataForRabbit);
 	}
 
-	// useEffect(() => {
-	// 	console.log("efect");
-	
-	// },[rabbit])
 
 	return <>
 		<button

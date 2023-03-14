@@ -1,28 +1,33 @@
 
 
-import { useSelector } from 'react-redux';
-import { getRabbitCoordinates } from '../../features/rabbit/rabbitSlice';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getBoardSize } from '../../features/boardSize/boardSizeSlice';
+import { getRabbitCoordinates, sendRabbitTransition } from '../../features/rabbit/rabbitSlice';
 import { getGameStatus } from '../../features/startButton/startButtonSlice';
-import useCoordinateEditing from '../../Hooks/compilerXYCoordinates.hook';
+import useCoordinateEditing from '../../Hooks/coordinateEditing.hook';
 
 import rabbitStyle from './Rabbit.module.css';
 
 const Rabbit = () => {
+	const dispatch = useDispatch()
 	const { gameStatus } = useSelector(getGameStatus);
 	const createCSSCoordinates = useCoordinateEditing();
-	const rabbitCoordinates = useSelector(getRabbitCoordinates);
+	const rabbit = useSelector(getRabbitCoordinates);
+	const boardSize = useSelector(getBoardSize).boardSize;
 
-	let conditionalRendering = rabbitCoordinates.x !== null && rabbitCoordinates.x !== undefined;
-	const { x, y } = conditionalRendering && createCSSCoordinates(rabbitCoordinates.x, rabbitCoordinates.y);
-	conditionalRendering && console.log(x, y);
+	let conditionalRendering = rabbit.x !== null && rabbit.x !== undefined;
+	const { x, y } = conditionalRendering && createCSSCoordinates(rabbit.x, rabbit.y);
+
+
+
 	return conditionalRendering && <div
-		style={{
-			transform: `translate(
+		style={{ transform:`translate(
 				${x}px, 
 				${y}px
 				)`,
 			display: gameStatus ? 'block' : 'none',
-			// opacity: x === 200 ? "0" : "1",
+			// opacity: rabbit.y >= 5 ? "0" : "1",
 		}}
 		className={`
 	${rabbitStyle.size}

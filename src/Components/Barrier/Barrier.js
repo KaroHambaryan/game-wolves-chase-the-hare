@@ -1,5 +1,5 @@
 
-import useCoordinateEditing from '../../Hooks/compilerXYCoordinates.hook';
+import useCoordinateEditing from '../../Hooks/coordinateEditing.hook';
 import { useSelector } from 'react-redux';
 import { getGameStatus } from '../../features/startButton/startButtonSlice';
 import barrierStyle from './Barrier.module.css';

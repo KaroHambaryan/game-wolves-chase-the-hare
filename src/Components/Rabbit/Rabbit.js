@@ -9,11 +9,11 @@ import rabbitStyle from './Rabbit.module.css';
 
 const Rabbit = () => {
 	const { gameStatus } = useSelector(getGameStatus);
-	const getCSSCoordinates = useCompilerXYtoCSSCoordinates();
+	const createCSSCoordinates = useCompilerXYtoCSSCoordinates();
 	const rabbitCoordinates = useSelector(getRabbitCoordinates);
 
 	let conditionalRendering = rabbitCoordinates.x !== null && rabbitCoordinates.x !== undefined;
-	const { x, y } = conditionalRendering && getCSSCoordinates(rabbitCoordinates.x, rabbitCoordinates.y);
+	const { x, y } = conditionalRendering && createCSSCoordinates(rabbitCoordinates.x, rabbitCoordinates.y);
 	conditionalRendering && console.log(x, y);
 	return conditionalRendering && <div
 		style={{
@@ -21,7 +21,8 @@ const Rabbit = () => {
 				${x}px, 
 				${y}px
 				)`,
-			display: gameStatus ? 'block' : 'none'
+			display: gameStatus ? 'block' : 'none',
+			// opacity: x === 200 ? "0" : "1",
 		}}
 		className={`
 	${rabbitStyle.size}

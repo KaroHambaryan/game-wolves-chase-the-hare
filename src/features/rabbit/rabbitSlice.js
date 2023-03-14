@@ -1,6 +1,7 @@
 // Reduser Rabbit coordinates from control buttons block
 export function changeRabbitCoordinates(state = {}, action) {
 	var ifChangeRabbitCoordinates = false;
+	var ifTransition = false;
 	const buttonsName = ["up", "down", "left", "right"];
 	const ifDuttonDown = buttonsName.includes(action.type);
 
@@ -8,12 +9,12 @@ export function changeRabbitCoordinates(state = {}, action) {
 		const { wolves, barriers, house, rabbit, size } = action.payload.dataForRabbit;
 
 		const ifOutsideOrNot = ifNextStepsMatch(checkOutsideOrNot, [rabbit, size.boardSize, action.type]);
-		const ifTransition = ifOutsideOrNot && ifNextStepsMatch(checkFuturePosition, [rabbit, size.boardSize, action.type, action.payload.dataForRabbit]);
+		ifTransition = ifOutsideOrNot && ifNextStepsMatch(checkFuturePosition, [rabbit, size.boardSize, action.type, action.payload.dataForRabbit]);
 
 		const ifWolves = includesXYInObject(wolves, ifNextStepsMatch, toCompareXYInArray, [rabbit, house, action.type]);
 		const ifBarriers = includesXYInObject(barriers, ifNextStepsMatch, toCompareXYInArray, [rabbit, house, action.type]);
 		const ifHouse = ifNextStepsMatch(toCompareXYInObject, [rabbit, house, action.type]);
-		
+
 		ifChangeRabbitCoordinates = ifWolves || ifBarriers || ifHouse || ifTransition
 	}
 	if (action.type === "up" && !ifChangeRabbitCoordinates) {

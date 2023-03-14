@@ -4,10 +4,10 @@ import { useSelector } from 'react-redux';
 import { getGameStatus } from '../../features/startButton/startButtonSlice';
 import barrierStyle from './Barrier.module.css';
 
-const Barrier = ({prop}) => {
+const Barrier = ({ prop }) => {
 	const { gameStatus } = useSelector(getGameStatus);
-	const getCSSCoordinates = useCompilerXYtoCSSCoordinates();
-	const barrier = prop && getCSSCoordinates(prop.x, prop.y);
+	const createCSSCoordinates = useCompilerXYtoCSSCoordinates();
+	const barrier = prop && createCSSCoordinates(prop.x, prop.y);
 
 	return prop && <div
 		style={{

@@ -8,11 +8,11 @@ import houseStyle from './House.module.css';
 
 const House = () => {
 	const { gameStatus } = useSelector(getGameStatus);
-	const getCSSCoordinates = useCompilerXYtoCSSCoordinates();
+	const createCSSCoordinates = useCompilerXYtoCSSCoordinates();
 	const houseCoordinates = useSelector(getHouseCoordinates);
 
 	let conditionalRendering = houseCoordinates.x !== null && houseCoordinates.x !== undefined;
-	const { x, y } = conditionalRendering && getCSSCoordinates(houseCoordinates.x, houseCoordinates.y);
+	const { x, y } = conditionalRendering && createCSSCoordinates(houseCoordinates.x, houseCoordinates.y);
 
 	return conditionalRendering && <div
 		style={{

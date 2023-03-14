@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 import { getGameStatus } from '../../features/startButton/startButtonSlice';
 import wolfStyle from './Wolf.module.css';
 
-const Wolf = ({prop}) => {
+const Wolf = ({ prop }) => {
 	const { gameStatus } = useSelector(getGameStatus);
-	const getCSSCoordinates = useCompilerXYtoCSSCoordinates();
-	const wolf = prop && getCSSCoordinates(prop.x, prop.y);
-	
+	const createCSSCoordinates = useCompilerXYtoCSSCoordinates();
+	const wolf = prop && createCSSCoordinates(prop.x, prop.y);
+
 	return prop && <div
 		style={{
 			transform: `translate(

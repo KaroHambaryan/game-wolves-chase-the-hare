@@ -1,12 +1,12 @@
 
-import useCompilerXYtoCSSCoordinates from '../../Hooks/compilerXYCoordinates.hook';
+import useCoordinateEditing from '../../Hooks/compilerXYCoordinates.hook';
 import { useSelector } from 'react-redux';
 import { getGameStatus } from '../../features/startButton/startButtonSlice';
 import barrierStyle from './Barrier.module.css';
 
 const Barrier = ({ prop }) => {
 	const { gameStatus } = useSelector(getGameStatus);
-	const createCSSCoordinates = useCompilerXYtoCSSCoordinates();
+	const createCSSCoordinates = useCoordinateEditing();
 	const barrier = prop && createCSSCoordinates(prop.x, prop.y);
 
 	return prop && <div

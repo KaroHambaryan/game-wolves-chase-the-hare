@@ -3,12 +3,12 @@
 import { useSelector } from 'react-redux';
 import { getHouseCoordinates } from '../../features/house/houseSlice';
 import { getGameStatus } from '../../features/startButton/startButtonSlice';
-import useCompilerXYtoCSSCoordinates from '../../Hooks/compilerXYCoordinates.hook';
+import useCoordinateEditing from '../../Hooks/compilerXYCoordinates.hook';
 import houseStyle from './House.module.css';
 
 const House = () => {
 	const { gameStatus } = useSelector(getGameStatus);
-	const createCSSCoordinates = useCompilerXYtoCSSCoordinates();
+	const createCSSCoordinates = useCoordinateEditing();
 	const houseCoordinates = useSelector(getHouseCoordinates);
 
 	let conditionalRendering = houseCoordinates.x !== null && houseCoordinates.x !== undefined;

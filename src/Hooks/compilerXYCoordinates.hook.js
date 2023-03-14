@@ -1,6 +1,6 @@
 
 
-export default function useCompilerXYtoCSSCoordinates() {
+export default function useCoordinateEditing() {
 
 	const createCSSCoordinates = (elemX, elemY) => {
 		const oneCellPersent = 40;
@@ -11,6 +11,6 @@ export default function useCompilerXYtoCSSCoordinates() {
 		return cssCoordinates;
 	}
 
-	
+
 	return createCSSCoordinates;
 }

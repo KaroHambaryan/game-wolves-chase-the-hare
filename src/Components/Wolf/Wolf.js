@@ -1,11 +1,11 @@
-import useCompilerXYtoCSSCoordinates from '../../Hooks/compilerXYCoordinates.hook';
+import useCoordinateEditing from '../../Hooks/compilerXYCoordinates.hook';
 import { useSelector } from 'react-redux';
 import { getGameStatus } from '../../features/startButton/startButtonSlice';
 import wolfStyle from './Wolf.module.css';
 
 const Wolf = ({ prop }) => {
 	const { gameStatus } = useSelector(getGameStatus);
-	const createCSSCoordinates = useCompilerXYtoCSSCoordinates();
+	const createCSSCoordinates = useCoordinateEditing();
 	const wolf = prop && createCSSCoordinates(prop.x, prop.y);
 
 	return prop && <div

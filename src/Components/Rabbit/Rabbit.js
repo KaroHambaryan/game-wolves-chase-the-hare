@@ -3,13 +3,13 @@
 import { useSelector } from 'react-redux';
 import { getRabbitCoordinates } from '../../features/rabbit/rabbitSlice';
 import { getGameStatus } from '../../features/startButton/startButtonSlice';
-import useCompilerXYtoCSSCoordinates from '../../Hooks/compilerXYCoordinates.hook';
+import useCoordinateEditing from '../../Hooks/compilerXYCoordinates.hook';
 
 import rabbitStyle from './Rabbit.module.css';
 
 const Rabbit = () => {
 	const { gameStatus } = useSelector(getGameStatus);
-	const createCSSCoordinates = useCompilerXYtoCSSCoordinates();
+	const createCSSCoordinates = useCoordinateEditing();
 	const rabbitCoordinates = useSelector(getRabbitCoordinates);
 
 	let conditionalRendering = rabbitCoordinates.x !== null && rabbitCoordinates.x !== undefined;

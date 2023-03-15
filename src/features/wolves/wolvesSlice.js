@@ -53,7 +53,9 @@ function nextWalk() {
 		return newMatrix;
 	}
 
-	
+	function searchStartNeighbor(newMatrix, start){
+
+	}
 
 
 

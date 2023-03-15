@@ -17,6 +17,50 @@ export function changeWolvesCoordinates(state = {}, action) {
 	return state;
 }
 
+function nextWalk() {
+	const start = {};
+	const end = {};
+	const closed_list = [];
+
+	function createMatrix(end, boardSize) {
+		const matrix = [];
+
+		for (let i = 0; i < boardSize; i++) {
+			const row = [];
+			for (let j = 0; j < boardSize; j++) {
+				let gx = Math.abs(end.x - i);
+				let gy = Math.abs(end.y - j);
+				let g = gx + gy
+				let x = i;
+				let y = j;
+				const cell = { g, x, y };
+
+				row.push(cell);
+			}
+			matrix.push(row);
+		}
+		return matrix;
+	}
+
+	function removeМatchWithMatrix(closed_list, matrix) {
+		const newMatrix = matrix.flat();
+		for (let i = 0; i < newMatrix.length; i++) {
+			let ifInArray = closed_list.some((elem) => elem.x === newMatrix[i].x && elem.y === newMatrix[i].y)
+			if (ifInArray) {
+				newMatrix.splice(i,1)
+			}
+		}
+		return newMatrix;
+	}
+
+	
+
+
+
+}
+
+
+
 export const initialWolvesCoordinates = {}
 
 

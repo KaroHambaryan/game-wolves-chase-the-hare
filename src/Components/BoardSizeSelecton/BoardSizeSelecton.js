@@ -2,6 +2,7 @@
 
 import { useDispatch} from 'react-redux';
 import { sendNewBoardSize } from '../../features/boardSize/boardSizeSlice';
+import { changeButtonStatusFromSelect } from '../../features/button/buttonSlice';
 import { sendGameStatus } from '../../features/startButton/startButtonSlice';
 
 import boardSizeSelectonStyle from './BoardSizeSelecton.module.css';
@@ -14,6 +15,7 @@ const BoardSizeSelecton = () => {
 	const changeSizeBoard = (event) => {
 		dispatch(sendGameStatus(false));
 		dispatch(sendNewBoardSize(+event.target.value));
+		dispatch(changeButtonStatusFromSelect());
 	};
 
 

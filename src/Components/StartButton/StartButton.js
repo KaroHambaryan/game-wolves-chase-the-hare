@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { sendBarriersRandomCoordinates } from '../../features/barrier/barrierSlice';
 import { getBoardSize } from '../../features/boardSize/boardSizeSlice';
+import { changeButtonStatusFromStart } from '../../features/button/buttonSlice';
 import { sendHouseRandomCoodinates } from '../../features/house/houseSlice';
 import { sendRabbitRandomCoodinates } from '../../features/rabbit/rabbitSlice';
 import { getRandomCoordinates, sendRandomCoodinates } from '../../features/randomCoordinates/randomCoordinatesSlice';
@@ -35,6 +36,7 @@ const StartButton = () => {
 	const changeGameStatus = () => {
 		dispatch(sendGameStatus(true));
 		dispatch(sendRandomCoodinates(boardSize));
+		dispatch(changeButtonStatusFromStart());
 	}
 
 	return <>

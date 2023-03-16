@@ -6,6 +6,7 @@ import { initialHouseCoordinates, changeHouseCoordinates } from '../features/hou
 import { initialBarriersCoordinates, changebarriersCoordinates } from '../features/barrier/barrierSlice';
 import { initialRabbitCoordinates, changeRabbitCoordinates } from '../features/rabbit/rabbitSlice';
 import { initialWolvesCoordinates, changeWolvesCoordinates } from '../features/wolves/wolvesSlice';
+import { checkButtonStatus, initialButtonStatus } from '../features/button/buttonSlice';
 
 const store = createStore(combineReducers({
 	gameStatus: changeGameStatus,
@@ -15,6 +16,7 @@ const store = createStore(combineReducers({
 	barriersCoordinates: changebarriersCoordinates,
 	rabbitCoordinates: changeRabbitCoordinates,
 	wolvesCoordinates: changeWolvesCoordinates,
+	button: checkButtonStatus
 }), {
 	gameStatus: initialGameStatus,
 	boardSize: initialBoardSize,
@@ -23,6 +25,7 @@ const store = createStore(combineReducers({
 	barriersCoordinates: initialBarriersCoordinates,
 	rabbitCoordinates: initialRabbitCoordinates,
 	wolvesCoordinates: initialWolvesCoordinates,
+	button: initialButtonStatus
 })
 
 export default store;

@@ -1,8 +1,8 @@
 export function changeRandomCoordinates(state = {}, action) {
 	if (action.type === "Change_Random_Coordinates") {
 		const participants = 11;
-		const randomPositionsArray = generateRandomXYPositions(participants,action.payload.size)
-		const { wolves, barriers, rabbit, house } = arrangeRandomCoordinates(randomPositionsArray);
+		const randomPositionsArray = generateRandomXYPositions(participants, action.payload.size)
+		const { wolves, barriers, rabbit, house } = sortRandomCoordinates(randomPositionsArray);
 		return { wolves, barriers, rabbit, house };
 	}
 	return state;
@@ -37,14 +37,14 @@ function generateRandomXYPositions(participants, boardSize) {
 		const y = Math.floor(Math.random() * boardSize);
 		const pos = { x, y };
 		if (!newPositions.some((p) => p.x === x && p.y === y)) {
-				newPositions.push(pos);
+			newPositions.push(pos);
 		}
 	}
 
 	return newPositions;
 }
 
-function arrangeRandomCoordinates(array) {
+function sortRandomCoordinates(array) {
 	const wolves = [];
 	const barriers = [];
 	const rabbit = [];

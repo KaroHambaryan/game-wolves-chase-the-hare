@@ -16,7 +16,7 @@ export function changeWolvesCoordinates(state = {}, action) {
 		}
 	} else if (action.type === "Next_Walk") {
 		return getStepsWolves(action.payload.dataFroWolves).map((elem) => {
-			return elem
+			return elem;
 		})
 	}
 	return state;
@@ -50,12 +50,7 @@ export function startNextWalk(dataFroWolves) {
 }
 
 // ==========================================================
-function nextWalk(startyy, endyy, closed_listyy, boardSizeyy) {
-	const start = startyy;
-	const end = endyy;
-	const closed_list = closed_listyy;
-	const boardSize = boardSizeyy;
-
+function nextWalk(start, end, closed_list, boardSize) {
 	const matrix = createMatrix(end, boardSize);
 	const newMatrix = removeМatchWithMatrix(closed_list, matrix);
 	const neighborsArray = createStartNeighbor(start, boardSize);
@@ -64,7 +59,6 @@ function nextWalk(startyy, endyy, closed_listyy, boardSizeyy) {
 
 	function createMatrix(end, boardSize) {
 		const matrix = [];
-
 		for (let i = 0; i < boardSize; i++) {
 			const row = [];
 			for (let j = 0; j < boardSize; j++) {
@@ -83,14 +77,14 @@ function nextWalk(startyy, endyy, closed_listyy, boardSizeyy) {
 	}
 
 	function removeМatchWithMatrix(closed_list, matrix) {
-		const newMatrix = matrix.flat();
-		for (let i = 0; i < newMatrix.length; i++) {
-			let ifInArray = closed_list.some((elem) => (elem.x === newMatrix[i].x) && (elem.y === newMatrix[i].y));
-			if (ifInArray) {
-				newMatrix.splice(i, 1)
+		const oldMatrix = [...matrix.flat()];
+		const newMatrix = [];
+		for (let i = 0; i < oldMatrix.length; i++) {
+			let ifInArray = closed_list.some((elem) => (elem.x === oldMatrix[i].x) && (elem.y === oldMatrix[i].y));
+			if (!ifInArray) {
+				newMatrix.push(oldMatrix[i]);
 			}
 		}
-
 		return newMatrix;
 	}
 
@@ -116,11 +110,10 @@ function nextWalk(startyy, endyy, closed_listyy, boardSizeyy) {
 			let left_coordinates = { x: start.x - 1, y: start.y };
 			neighborsArray.push(left_coordinates);
 		}
-
 		return neighborsArray;
 	}
 
-	function searchStartNeighbor(newMatrix,neighborsArray) {
+	function searchStartNeighbor(newMatrix, neighborsArray) {
 		const start_neighbor = [];
 		for (let i = 0; i < newMatrix.length; i++) {
 			let ifInArray = neighborsArray.some((elem) => elem.x === newMatrix[i].x && elem.y === newMatrix[i].y)
@@ -134,12 +127,10 @@ function nextWalk(startyy, endyy, closed_listyy, boardSizeyy) {
 
 	function createCoordinate(start_neighbor) {
 		let gArray = new Set();
-	
-		
 		for (let i = 0; i < start_neighbor.length; i++) {
 			gArray.add(start_neighbor[i].g);
 		}
-	
+
 		let newStart_Neighbor = [...gArray];
 		let min = newStart_Neighbor[0];
 		for (let i = 0; i < newStart_Neighbor.length; i++) {
@@ -147,11 +138,8 @@ function nextWalk(startyy, endyy, closed_listyy, boardSizeyy) {
 				min = newStart_Neighbor[i];
 			}
 		}
-
-		return start_neighbor.filter((elem)=>elem.g === min)[0];
+		return start_neighbor.filter((elem) => elem.g === min)[0];
 	}
-
-
 
 	return min_coords
 }
@@ -159,17 +147,23 @@ function nextWalk(startyy, endyy, closed_listyy, boardSizeyy) {
 function getStepsWolves(object) {
 	const wolves = Object.values(object.wolves);
 	const barriers = Object.values(object.barriers);
-	const end = object.rabbit;
-	const house = [object.house];
+	const house = object.house;
+	console.log(house,"wolves");
 	const boardSize = object.size.boardSize;
+	
+	const end = object.rabbit;
+	const closed_list = [house, ...barriers];
+	
+	const oldWolves = [...wolves];
 	const newWolvesArray = [];
-	
-	
-	while (wolves.length) {
-		const start = wolves.shift();
-		const closed_list = [ ...barriers, ...wolves, ...newWolvesArray, ...house];
+	let i = 0;
+	while (oldWolves.length) {
+		const start = oldWolves.shift();
 		newWolvesArray.push(nextWalk(start, end, closed_list, boardSize));
+		closed_list.push(newWolvesArray[i]);
+		i++
 	}
+	// let filteredWolves = filtrOutTheWolves(wolves, newWolvesArray);
 
-	return newWolvesArray
+	return newWolvesArray;
 }
